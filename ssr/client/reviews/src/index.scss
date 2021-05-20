@@ -1,0 +1,120 @@
+$light-grey: rgb(230, 230, 230);
+$medium-grey: rgb(137, 137, 137);
+$dark-grey: rgb(76, 76, 76);
+$blue-accent: rgb(49, 0, 255);
+
+.reviews-section-container {
+    $light-grey: rgb(230, 230, 230);
+    $medium-grey: rgb(137, 137, 137);
+    $dark-grey: rgb(76, 76, 76);
+    $blue-accent: rgb(49, 0, 255);
+    @extend .bottom-padding;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+.reviews-section-title {
+    @extend .bottom-margin;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 2.75rem;
+    margin-bottom: 1rem;
+    color: black;
+}
+
+.reviews-section-stats {
+    @extend .light-border-bottom;
+    @extend .bottom-padding;
+    font-weight: 400;
+    color: black;
+}
+
+.reviews-section-card {
+    @extend .bottom-padding;
+    @extend .light-border-bottom;
+    padding-top: 5px;
+    line-height: 0.7rem;
+    background: white;
+    .reviews-section-author {
+        @extend .top-padding;
+        font-weight: 600;
+        line-height: 1.5rem;
+        background: white;
+    }
+
+    .reviews-section-date {
+        @extend .medium-grey-text;
+        line-height: 1.5rem;
+    }
+
+    .reviews-section-stars {
+        line-height: 1.5rem;
+        color: gold;
+    }
+
+    .reviews-section-content {
+        line-height: 1.5rem;
+        text-overflow: ellipsis;
+        color: black;
+    }
+}
+
+.grey-border-bottom {
+    border-bottom: 1px solid grey;
+}
+
+.light-border-bottom {
+    border-bottom: 1px solid $light-grey;
+}
+
+.medium-grey-text {
+    color: $medium-grey;
+}
+
+.bottom-margin {
+    margin-bottom: 1.5rem;
+}
+
+.bottom-padding {
+    padding-bottom: 1.5rem;
+}
+
+.top-padding {
+    padding-top: 1rem;
+}
+.grey-line {
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 15px;
+    vertical-align: text-bottom;
+    color: $light-grey;
+}
+
+.star-container {
+    display: inline-bloc;
+    position: relative;
+    cursor: pointer;
+}
+
+.star {
+    margin-right: 12px;
+    color: rgb(255, 204, 0);
+}
+
+.star-small {
+    line-height: 1rem;
+    vertical-align: middle;
+    color: rgb(255, 204, 0);
+    margin-right: 6px;
+}
+
+.blue-links {
+    color: $blue-accent;
+    text-decoration: none;
+}
+
+.blue-links:hover {
+    cursor: pointer;
+    text-decoration: none;
+}

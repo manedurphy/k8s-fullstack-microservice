@@ -1,0 +1,28 @@
+FROM node:15-alpine as build
+
+WORKDIR /app
+
+COPY ./package.json ./
+COPY ./package-lock.json ./
+
+RUN npm install
+
+COPY ./ ./
+
+RUN npm run build
+
+FROM node:15-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/package.json /app
+COPY --from=build /app/package-lock.json /app
+COPY --from=build /app/public /app/public
+
+RUN npm install --production
+
+COPY --from=build /app/dist /app/dist
+
+EXPOSE 6002
+
+CMD ["npm", "start"]

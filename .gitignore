@@ -1,0 +1,16 @@
+.DS_Store
+.env
+node_modules/
+
+build/
+ssr/dist
+ssr/client/dist
+
+reviews-service/dumps/*
+!reviews-service/dumps/catScript.sh
+!reviews-service/dumps/execCat.js
+
+data/*
+artillery/ids.csv
+
+kubeconfig/

@@ -1,0 +1,5 @@
+node_modules
+dataGeneration
+Dockerfile
+Dockerfile.prod
+dumps

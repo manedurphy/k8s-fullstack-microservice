@@ -1,0 +1,59 @@
+# Reviews Database
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: reviews
+  POSTGRES_USER: manedurphy
+  POSTGRES_PASSWORD: password1234
+  PGDATA: /var/lib/postgresql/data/pgdata
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-reviews
+  labels:
+    app: pg-reviews
+spec:
+  clusterIP: None
+  ports:
+  - port: 5432
+  selector:
+    app: pg-reviews
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-reviews
+  labels:
+    app: pg-reviews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pg-reviews
+  template:
+    metadata:
+      labels:
+        app: pg-reviews
+    spec:
+      nodeName: kind-worker
+      containers:
+      - name: postgres
+        image: postgres:latest
+        envFrom:
+        - configMapRef:
+            name: postgres-config
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        hostPath:
+          path: /data
+          type: Directory

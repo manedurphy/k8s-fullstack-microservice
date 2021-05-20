@@ -1,0 +1,16 @@
+{
+  "name": "artillery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generateIds.js",
+  "scripts": {
+    "generate": "node generateIds.js",
+    "stress": "artillery run stress.yaml"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-writer": "^1.6.0"
+  }
+}

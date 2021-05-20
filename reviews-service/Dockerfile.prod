@@ -1,0 +1,14 @@
+FROM node:15-alpine
+
+WORKDIR /app
+
+COPY ./package.json ./
+COPY ./package-lock.json ./
+
+RUN npm install --production
+
+COPY ./server ./server
+
+EXPOSE 5002
+
+CMD ["npm", "start"]

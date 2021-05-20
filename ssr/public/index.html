@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Space work</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    html {
+      box-sizing: border-box;
+      font-family: Roboto, sans-serif !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+
+    .page {
+      margin: auto;
+      max-width: 1320px;
+    }
+
+    .header {
+      margin: 48px 0;
+    }
+
+    .main {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .content {
+      flex: 0 0 872px;
+    }
+
+    .sidebar {
+      flex: 0 0 448px;
+      padding-left: 24px;
+    }
+
+    #contact-service {
+      height: 100%;
+    }
+
+    #contact-service>.column-container {
+      width: auto;
+      height: 100%;
+    }
+  </style>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/bb32e62705.js" crossorigin="anonymous"></script>
+  <script defer="defer" id="global"></script>
+  <script defer="defer" src="/runtime.bundle.js"></script>
+  <script defer="defer" src="/reviews.bundle.js"></script>
+  <link href="/reviews.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="nav"></div>
+  <div class="page">
+    <div class="header">
+      <div id="workspace-header"></div>
+      <div id="layout-header-address"></div>
+    </div>
+    <div class="main">
+      <div class="content">
+        <div id="reviews"></div>
+      </div>
+      <div class="sidebar">
+        <div id="contact-service"></div>
+      </div>
+    </div>
+  </div>
+  <div id="footer"></div>
+</body>
+
+</html>

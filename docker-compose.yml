@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  reviews-api:
+    container_name: reviews-api
+    restart: always
+    build:
+      context: ./reviews-service
+      dockerfile: Dockerfile.prod
+    environment: 
+      PG_USER: manedurphy
+      PG_PASSWORD: password1234
+      PG_DB: reviews
+      HOST: pg-reviews
+      NEW_RELIC_APP_NAME: reviews-api-local
+      NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
+    depends_on: 
+      - pg-reviews
+
+  pg-reviews:
+    image: postgres
+    container_name: pg-reviews
+    restart: always
+    environment:
+      POSTGRES_USER: manedurphy
+      POSTGRES_PASSWORD: password1234
+      POSTGRES_DB: reviews
+    volumes:
+      - ./reviews-service/dumps/dump.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+      - ./data/pg-reviews:/var/lib/postgresql/data
+
+  ssr:
+    container_name: ssr
+    build:
+      context: ./ssr
+      dockerfile: Dockerfile.prod
+    ports:
+      - "6002:6002"
+    depends_on: 
+      - go
+    environment:
+      GO_DOMAIN: http://go:6003/api/
+      READ_REDIS_URL: redis://redis:6379/0
+      WRITE_REDIS_URL: redis://redis:6379/0
+
+  client:
+    container_name: client
+    build:
+      context: ./ssr/client
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - ssr
+
+  go:
+    container_name: go
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    ports:
+      - "6003:6003"
+    environment:
+      REVIEWS_DOMAIN: http://reviews-api:5002/api/reviews/all/
+    depends_on:
+      - reviews-api
+
+  redis:
+    container_name: redis
+    image: redis:6.0-alpine
+    

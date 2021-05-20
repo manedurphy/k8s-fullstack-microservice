@@ -1,0 +1,1 @@
+cat dumps/head.sql dumps/copyReviews.sql dumps/reviewsBody0.sql dumps/copyUsers.sql dumps/usersBody0.sql dumps/foot.sql > dumps/dump.sql
