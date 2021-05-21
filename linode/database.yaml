@@ -1,0 +1,70 @@
+# Reviews Database
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: reviews
+  POSTGRES_USER: manedurphy
+  POSTGRES_PASSWORD: password1234
+  PGDATA: /var/lib/postgresql/data/pgdata
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pg-pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: linode-block-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-reviews
+  labels:
+    app: pg-reviews
+spec:
+  # type: LoadBalancer
+  clusterIP: None
+  ports:
+  - port: 5432
+  selector:
+    app: pg-reviews
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-reviews
+  labels:
+    app: pg-reviews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pg-reviews
+  template:
+    metadata:
+      labels:
+        app: pg-reviews
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        envFrom:
+        - configMapRef:
+            name: postgres-config
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: pg-pv
