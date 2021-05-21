@@ -5,6 +5,9 @@ This is a fullstack microservice application that I inherited and optimized on a
 [Install Docker](https://docs.docker.com/get-docker/)
 [Install Kind](https://kind.sigs.k8s.io/)
 
+## Purpose
+The purpose of this project was to inherit and existing microservice, and reconstruct the backend coding as well as implement optimizations. The biggest changes I implemented were a caching system with Redis, server-side rendering, and high availablility with Kubernetes. This reviews persists data using a two-table Postgres database which was deployed using an Amazon RDS instance which was separate from the Kubernetes cluster. However, for the sake of demonstating my work, I have simplified the code to run the database in a pod locally, and the steps necessary to seed it and run everything are specified below.
+
 ## Running locally
 
 To run this application locally, we will first need to generate some data for our PostgreSQL database. To do this, enter the `reviews-service` directory and run the following commands:
